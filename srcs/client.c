@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 17:11:01 by baiannon          #+#    #+#             */
-/*   Updated: 2024/09/13 20:16:21 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/09/17 15:50:54 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ void	send_bits(int pid, char c)
 		{
 			if (kill(pid, SIGUSR1))
 			{
-				ft_printf("Error: Invalid PID!\n");
+				ft_printf(RED "Error: Invalid PID!\n" RESET);
 				exit(EXIT_FAILURE);
 			}
 		}
 		else if (kill(pid, SIGUSR2))
 		{
-			ft_printf("Error: Invalid PID!\n");
+			ft_printf(RED "Error: Invalid PID!\n" RESET);
 			exit(EXIT_FAILURE);
 		}
 		c >>= 1;
@@ -42,7 +42,6 @@ void	signal_confirmation(int signal)
 	(void)signal;
 }
 
-
 int	main(int ac, char **av)
 {
 	int		i;
@@ -51,12 +50,14 @@ int	main(int ac, char **av)
 	i = 0;
 	if (ac != 3)
 	{
-		ft_printf("Error: ./client <PID> [Message]\n");
+		ft_printf(RED "Error: ./client <PID> [Message]\n" RESET);
 		exit(EXIT_FAILURE);
 	}
 	signal(SIGUSR1, signal_confirmation);
 	pid = ft_atoi(av[1]);
 	while (av[2][i])
 		send_bits(pid, av[2][i++]);
+	send_bits(pid, 0);
+	ft_printf(GREEN "Message received with success!\n" RESET);
 	return (0);
 }
