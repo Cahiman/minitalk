@@ -6,7 +6,7 @@
 /*   By: baiannon <baiannon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 17:11:01 by baiannon          #+#    #+#             */
-/*   Updated: 2024/09/17 15:50:54 by baiannon         ###   ########.fr       */
+/*   Updated: 2024/09/18 15:02:58 by baiannon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	send_bits(int pid, char c)
 			exit(EXIT_FAILURE);
 		}
 		c >>= 1;
-		sleep(1);
+		usleep(500);
 	}
 }
 
